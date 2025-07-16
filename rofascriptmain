@@ -1,0 +1,1710 @@
+local authorizedUsers = {"l9ngard", "awrerewaaewr"}
+
+-- Check if the local player is authorized
+local player = game.Players.LocalPlayer
+if not table.find(authorizedUsers, player.Name) then
+    player:Kick("Not Authorized")
+    return -- Stop the script from executing further for unauthorized players
+end
+
+local ROFASCRIPT = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local TitleBar = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local TabButtons = Instance.new("Frame")
+local MainTab = Instance.new("TextButton")
+local CreditsTab = Instance.new("TextButton")
+local MainScrollingFrame = Instance.new("ScrollingFrame")
+local LegsFrame = Instance.new("Frame")
+local LegsLabel = Instance.new("TextLabel")
+local LegsPlus = Instance.new("TextButton")
+local LegsMinus = Instance.new("TextButton")
+local LegsSizeBox = Instance.new("TextBox")
+local ArmsFrame = Instance.new("Frame")
+local ArmsLabel = Instance.new("TextLabel")
+local ArmsPlus = Instance.new("TextButton")
+local ArmsMinus = Instance.new("TextButton")
+local ArmsSizeBox = Instance.new("TextBox")
+local HeadFrame = Instance.new("Frame")
+local HeadLabel = Instance.new("TextLabel")
+local HeadPlus = Instance.new("TextButton")
+local HeadMinus = Instance.new("TextButton")
+local HeadSizeBox = Instance.new("TextBox")
+local TorsoFrame = Instance.new("Frame")
+local TorsoLabel = Instance.new("TextLabel")
+local TorsoPlus = Instance.new("TextButton")
+local TorsoMinus = Instance.new("TextButton")
+local TorsoSizeBox = Instance.new("TextBox")
+local SSBallFrame = Instance.new("Frame")
+local SSBallLabel = Instance.new("TextLabel")
+local SSBallPlus = Instance.new("TextButton")
+local SSBallMinus = Instance.new("TextButton")
+local SSBallSizeBox = Instance.new("TextBox")
+
+-- Misc Frame and its elements
+local MiscFrame = Instance.new("Frame")
+local MiscLabel = Instance.new("TextLabel")
+
+-- Auto SS Ball Control
+local AutoSSBallControlFrame = Instance.new("Frame")
+local AutoSSBallControlLabel = Instance.new("TextLabel")
+local AutoSSBallControlToggle = Instance.new("TextButton")
+local AutoSSBallControlKeyLabel = Instance.new("TextLabel")
+local AutoSSBallControlKeyBox = Instance.new("TextBox")
+local DesiredDistanceBox = Instance.new("TextBox")
+local SidewaysMultiplierBox = Instance.new("TextBox")
+local BackwardMultiplierBox = Instance.new("TextBox")
+local GuardRangeBox = Instance.new("TextBox")
+
+-- Auto Dive specific elements
+local AutoDiveFrame = Instance.new("Frame")
+local AutoDiveLabel = Instance.new("TextLabel")
+local AutoDiveToggle = Instance.new("TextButton")
+local AutoDiveKeyLabel = Instance.new("TextLabel")
+local AutoDiveKeyBox = Instance.new("TextBox")
+local DiveDistanceBox = Instance.new("TextBox")
+local DiveMinSpeedBox = Instance.new("TextBox")
+local OffsetJumpThresholdBox = Instance.new("TextBox")
+local SideStepDistanceBox = Instance.new("TextBox")
+
+local WalkSpeedFrame = Instance.new("Frame")
+local WalkSpeedLabel = Instance.new("TextLabel")
+local WalkSpeedToggle = Instance.new("TextButton")
+
+-- Settings Frame and its elements
+local SettingsFrame = Instance.new("Frame")
+local SettingsLabel = Instance.new("TextLabel")
+local CloseKeyFrame = Instance.new("Frame")
+local CloseKeyLabel = Instance.new("TextLabel")
+local CloseKeyBox = Instance.new("TextBox")
+local PanicKeyFrame = Instance.new("Frame")
+local PanicKeyLabel = Instance.new("TextLabel")
+local PanicKeyBox = Instance.new("TextBox")
+
+local CreditsFrame = Instance.new("Frame")
+local CreditsLabel = Instance.new("TextLabel")
+local CreditsText = Instance.new("TextLabel")
+local Divider = Instance.new("Frame")
+
+-- GUI Properties Initialization
+ROFASCRIPT.Name = "ROFA SCRIPT"
+ROFASCRIPT.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ROFASCRIPT.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ROFASCRIPT.Enabled = true
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ROFASCRIPT
+MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.3, 0, 0.3, 0)
+MainFrame.Size = UDim2.new(0, 350, 0, 450)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+TitleBar.Name = "TitleBar"
+TitleBar.Parent = MainFrame
+TitleBar.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TitleBar.BorderSizePixel = 0
+TitleBar.Size = UDim2.new(1, 0, 0, 30)
+
+Title.Name = "Title"
+Title.Parent = TitleBar
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1.000
+Title.Position = UDim2.new(0, 10, 0, 0)
+Title.Size = UDim2.new(0, 200, 1, 0)
+Title.Font = Enum.Font.GothamBold
+Title.Text = "RO-FA SCRIPT"
+Title.TextColor3 = Color3.fromRGB(74, 137, 255)
+Title.TextSize = 14.000
+Title.TextXAlignment = Enum.TextXAlignment.Left
+
+TabButtons.Name = "TabButtons"
+TabButtons.Parent = MainFrame
+TabButtons.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TabButtons.BorderSizePixel = 0
+TabButtons.Position = UDim2.new(0, 0, 0, 30)
+TabButtons.Size = UDim2.new(1, 0, 0, 30)
+
+MainTab.Name = "MainTab"
+MainTab.Parent = TabButtons
+MainTab.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+MainTab.BorderSizePixel = 0
+MainTab.Size = UDim2.new(0.5, 0, 1, 0)
+MainTab.Font = Enum.Font.Gotham
+MainTab.Text = "MAIN"
+MainTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+MainTab.TextSize = 14.000
+
+CreditsTab.Name = "CreditsTab"
+CreditsTab.Parent = TabButtons
+CreditsTab.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+CreditsTab.BorderSizePixel = 0
+CreditsTab.Position = UDim2.new(0.5, 0, 0, 0)
+CreditsTab.Size = UDim2.new(0.5, 0, 1, 0)
+CreditsTab.Font = Enum.Font.Gotham
+CreditsTab.Text = "CREDITS"
+CreditsTab.TextColor3 = Color3.fromRGB(200, 200, 200)
+CreditsTab.TextSize = 14.000
+
+MainScrollingFrame.Name = "MainScrollingFrame"
+MainScrollingFrame.Parent = MainFrame
+MainScrollingFrame.Active = true
+MainScrollingFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+MainScrollingFrame.BorderSizePixel = 0
+MainScrollingFrame.Position = UDim2.new(0, 0, 0, 60)
+MainScrollingFrame.Size = UDim2.new(1, 0, 1, -60)
+MainScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 1050)
+MainScrollingFrame.ScrollBarThickness = 5
+MainScrollingFrame.Visible = true
+
+LegsFrame.Name = "LegsFrame"
+LegsFrame.Parent = MainScrollingFrame
+LegsFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+LegsFrame.BorderSizePixel = 0
+LegsFrame.Position = UDim2.new(0, 10, 0, 10)
+LegsFrame.Size = UDim2.new(1, -20, 0, 60)
+
+LegsLabel.Name = "LegsLabel"
+LegsLabel.Parent = LegsFrame
+LegsLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+LegsLabel.BackgroundTransparency = 1.000
+LegsLabel.Position = UDim2.new(0, 10, 0, 5)
+LegsLabel.Size = UDim2.new(0, 100, 0, 20)
+LegsLabel.Font = Enum.Font.Gotham
+LegsLabel.Text = "LEGS"
+LegsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+LegsLabel.TextSize = 14.000
+LegsLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+LegsPlus.Name = "LegsPlus"
+LegsPlus.Parent = LegsFrame
+LegsPlus.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+LegsPlus.BorderSizePixel = 0
+LegsPlus.Position = UDim2.new(0.5, 10, 0, 30)
+LegsPlus.Size = UDim2.new(0, 100, 0, 25)
+LegsPlus.Font = Enum.Font.Gotham
+LegsPlus.Text = "ENLARGE"
+LegsPlus.TextColor3 = Color3.fromRGB(255, 255, 255)
+LegsPlus.TextSize = 14.000
+
+LegsMinus.Name = "LegsMinus"
+LegsMinus.Parent = LegsFrame
+LegsMinus.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+LegsMinus.BorderSizePixel = 0
+LegsMinus.Position = UDim2.new(0, 10, 0, 30)
+LegsMinus.Size = UDim2.new(0, 100, 0, 25)
+LegsMinus.Font = Enum.Font.Gotham
+LegsMinus.Text = "RESET"
+LegsMinus.TextColor3 = Color3.fromRGB(255, 255, 255)
+LegsMinus.TextSize = 14.000
+
+LegsSizeBox.Name = "LegsSizeBox"
+LegsSizeBox.Parent = LegsFrame
+LegsSizeBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+LegsSizeBox.BorderSizePixel = 0
+LegsSizeBox.Position = UDim2.new(0.8, 10, 0, 30)
+LegsSizeBox.Size = UDim2.new(0, 60, 0, 25)
+LegsSizeBox.Font = Enum.Font.Gotham
+LegsSizeBox.PlaceholderText = "5,2,5"
+LegsSizeBox.Text = ""
+LegsSizeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+LegsSizeBox.TextSize = 12.000
+
+ArmsFrame.Name = "ArmsFrame"
+ArmsFrame.Parent = MainScrollingFrame
+ArmsFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+ArmsFrame.BorderSizePixel = 0
+ArmsFrame.Position = UDim2.new(0, 10, 0, 80)
+ArmsFrame.Size = UDim2.new(1, -20, 0, 60)
+
+ArmsLabel.Name = "ArmsLabel"
+ArmsLabel.Parent = ArmsFrame
+ArmsLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ArmsLabel.BackgroundTransparency = 1.000
+ArmsLabel.Position = UDim2.new(0, 10, 0, 5)
+ArmsLabel.Size = UDim2.new(0, 100, 0, 20)
+ArmsLabel.Font = Enum.Font.Gotham
+ArmsLabel.Text = "ARMS"
+ArmsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+ArmsLabel.TextSize = 14.000
+ArmsLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+ArmsPlus.Name = "ArmsPlus"
+ArmsPlus.Parent = ArmsFrame
+ArmsPlus.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+ArmsPlus.BorderSizePixel = 0
+ArmsPlus.Position = UDim2.new(0.5, 10, 0, 30)
+ArmsPlus.Size = UDim2.new(0, 100, 0, 25)
+ArmsPlus.Font = Enum.Font.Gotham
+ArmsPlus.Text = "ENLARGE"
+ArmsPlus.TextColor3 = Color3.fromRGB(255, 255, 255)
+ArmsPlus.TextSize = 14.000
+
+ArmsMinus.Name = "ArmsMinus"
+ArmsMinus.Parent = ArmsFrame
+ArmsMinus.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+ArmsMinus.BorderSizePixel = 0
+ArmsMinus.Position = UDim2.new(0, 10, 0, 30)
+ArmsMinus.Size = UDim2.new(0, 100, 0, 25)
+ArmsMinus.Font = Enum.Font.Gotham
+ArmsMinus.Text = "RESET"
+ArmsMinus.TextColor3 = Color3.fromRGB(255, 255, 255)
+ArmsMinus.TextSize = 14.000
+
+ArmsSizeBox.Name = "ArmsSizeBox"
+ArmsSizeBox.Parent = ArmsFrame
+ArmsSizeBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+ArmsSizeBox.BorderSizePixel = 0
+ArmsSizeBox.Position = UDim2.new(0.8, 10, 0, 30)
+ArmsSizeBox.Size = UDim2.new(0, 60, 0, 25)
+ArmsSizeBox.Font = Enum.Font.Gotham
+ArmsSizeBox.PlaceholderText = "5,2,5"
+ArmsSizeBox.Text = ""
+ArmsSizeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+ArmsSizeBox.TextSize = 12.000
+
+HeadFrame.Name = "HeadFrame"
+HeadFrame.Parent = MainScrollingFrame
+HeadFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+HeadFrame.BorderSizePixel = 0
+HeadFrame.Position = UDim2.new(0, 10, 0, 150)
+HeadFrame.Size = UDim2.new(1, -20, 0, 60)
+
+HeadLabel.Name = "HeadLabel"
+HeadLabel.Parent = HeadFrame
+HeadLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HeadLabel.BackgroundTransparency = 1.000
+HeadLabel.Position = UDim2.new(0, 10, 0, 5)
+HeadLabel.Size = UDim2.new(0, 100, 0, 20)
+HeadLabel.Font = Enum.Font.Gotham
+HeadLabel.Text = "HEAD"
+HeadLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+HeadLabel.TextSize = 14.000
+HeadLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+HeadPlus.Name = "HeadPlus"
+HeadPlus.Parent = HeadFrame
+HeadPlus.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+HeadPlus.BorderSizePixel = 0
+HeadPlus.Position = UDim2.new(0.5, 10, 0, 30)
+HeadPlus.Size = UDim2.new(0, 100, 0, 25)
+HeadPlus.Font = Enum.Font.Gotham
+HeadPlus.Text = "ENLARGE"
+HeadPlus.TextColor3 = Color3.fromRGB(255, 255, 255)
+HeadPlus.TextSize = 14.000
+
+HeadMinus.Name = "HeadMinus"
+HeadMinus.Parent = HeadFrame
+HeadMinus.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+HeadMinus.BorderSizePixel = 0
+HeadMinus.Position = UDim2.new(0, 10, 0, 30)
+HeadMinus.Size = UDim2.new(0, 100, 0, 25)
+HeadMinus.Font = Enum.Font.Gotham
+HeadMinus.Text = "RESET"
+HeadMinus.TextColor3 = Color3.fromRGB(255, 255, 255)
+HeadMinus.TextSize = 14.000
+
+HeadSizeBox.Name = "HeadSizeBox"
+HeadSizeBox.Parent = HeadFrame
+HeadSizeBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+HeadSizeBox.BorderSizePixel = 0
+HeadSizeBox.Position = UDim2.new(0.8, 10, 0, 30)
+HeadSizeBox.Size = UDim2.new(0, 60, 0, 25)
+HeadSizeBox.Font = Enum.Font.Gotham
+HeadSizeBox.PlaceholderText = "3,3,3"
+HeadSizeBox.Text = ""
+HeadSizeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+HeadSizeBox.TextSize = 12.000
+
+TorsoFrame.Name = "TorsoFrame"
+TorsoFrame.Parent = MainScrollingFrame
+TorsoFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+TorsoFrame.BorderSizePixel = 0
+TorsoFrame.Position = UDim2.new(0, 10, 0, 220)
+TorsoFrame.Size = UDim2.new(1, -20, 0, 60)
+
+TorsoLabel.Name = "TorsoLabel"
+TorsoLabel.Parent = TorsoFrame
+TorsoLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TorsoLabel.BackgroundTransparency = 1.000
+TorsoLabel.Position = UDim2.new(0, 10, 0, 5)
+TorsoLabel.Size = UDim2.new(0, 100, 0, 20)
+TorsoLabel.Font = Enum.Font.Gotham
+TorsoLabel.Text = "TORSO"
+TorsoLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TorsoLabel.TextSize = 14.000
+TorsoLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+TorsoPlus.Name = "TorsoPlus"
+TorsoPlus.Parent = TorsoFrame
+TorsoPlus.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+TorsoPlus.BorderSizePixel = 0
+TorsoPlus.Position = UDim2.new(0.5, 10, 0, 30)
+TorsoPlus.Size = UDim2.new(0, 100, 0, 25)
+TorsoPlus.Font = Enum.Font.Gotham
+TorsoPlus.Text = "ENLARGE"
+TorsoPlus.TextColor3 = Color3.fromRGB(255, 255, 255)
+TorsoPlus.TextSize = 14.000
+
+TorsoMinus.Name = "TorsoMinus"
+TorsoMinus.Parent = TorsoFrame
+TorsoMinus.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+TorsoMinus.BorderSizePixel = 0
+TorsoMinus.Position = UDim2.new(0, 10, 0, 30)
+TorsoMinus.Size = UDim2.new(0, 100, 0, 25)
+TorsoMinus.Font = Enum.Font.Gotham
+TorsoMinus.Text = "RESET"
+TorsoMinus.TextColor3 = Color3.fromRGB(255, 255, 255)
+TorsoMinus.TextSize = 14.000
+
+TorsoSizeBox.Name = "TorsoSizeBox"
+TorsoSizeBox.Parent = TorsoFrame
+TorsoSizeBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+TorsoSizeBox.BorderSizePixel = 0
+TorsoSizeBox.Position = UDim2.new(0.8, 10, 0, 30)
+TorsoSizeBox.Size = UDim2.new(0, 60, 0, 25)
+TorsoSizeBox.Font = Enum.Font.Gotham
+TorsoSizeBox.PlaceholderText = "5,5,5"
+TorsoSizeBox.Text = ""
+TorsoSizeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TorsoSizeBox.TextSize = 12.000
+
+SSBallFrame.Name = "SSBallFrame"
+SSBallFrame.Parent = MainScrollingFrame
+SSBallFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+SSBallFrame.BorderSizePixel = 0
+SSBallFrame.Position = UDim2.new(0, 10, 0, 290)
+SSBallFrame.Size = UDim2.new(1, -20, 0, 60)
+
+SSBallLabel.Name = "SSBallLabel"
+SSBallLabel.Parent = SSBallFrame
+SSBallLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SSBallLabel.BackgroundTransparency = 1.000
+SSBallLabel.Position = UDim2.new(0, 10, 0, 5)
+SSBallLabel.Size = UDim2.new(0, 100, 0, 20)
+SSBallLabel.Font = Enum.Font.Gotham
+SSBallLabel.Text = "SS BALL"
+SSBallLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+SSBallLabel.TextSize = 14.000
+SSBallLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+SSBallPlus.Name = "SSBallPlus"
+SSBallPlus.Parent = SSBallFrame
+SSBallPlus.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+SSBallPlus.BorderSizePixel = 0
+SSBallPlus.Position = UDim2.new(0.5, 10, 0, 30)
+SSBallPlus.Size = UDim2.new(0, 100, 0, 25)
+SSBallPlus.Font = Enum.Font.Gotham
+SSBallPlus.Text = "ENLARGE"
+SSBallPlus.TextColor3 = Color3.fromRGB(255, 255, 255)
+SSBallPlus.TextSize = 14.000
+
+SSBallMinus.Name = "SSBallMinus"
+SSBallMinus.Parent = SSBallFrame
+SSBallMinus.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+SSBallMinus.BorderSizePixel = 0
+SSBallMinus.Position = UDim2.new(0, 10, 0, 30)
+SSBallMinus.Size = UDim2.new(0, 100, 0, 25)
+SSBallMinus.Font = Enum.Font.Gotham
+SSBallMinus.Text = "RESET"
+SSBallMinus.TextColor3 = Color3.fromRGB(255, 255, 255)
+SSBallMinus.TextSize = 14.000
+
+SSBallSizeBox.Name = "SSBallSizeBox"
+SSBallSizeBox.Parent = SSBallFrame
+SSBallSizeBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+SSBallSizeBox.BorderSizePixel = 0
+SSBallSizeBox.Position = UDim2.new(0.8, 10, 0, 30)
+SSBallSizeBox.Size = UDim2.new(0, 60, 0, 25)
+SSBallSizeBox.Font = Enum.Font.Gotham
+SSBallSizeBox.PlaceholderText = "6,6,6"
+SSBallSizeBox.Text = ""
+SSBallSizeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+SSBallSizeBox.TextSize = 12.000
+
+-- Misc Frame Setup
+MiscFrame.Name = "MiscFrame"
+MiscFrame.Parent = MainScrollingFrame
+MiscFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+MiscFrame.BorderSizePixel = 0
+MiscFrame.Position = UDim2.new(0, 10, 0, 360)
+MiscFrame.Size = UDim2.new(1, -20, 0, 450)
+
+MiscLabel.Name = "MiscLabel"
+MiscLabel.Parent = MiscFrame
+MiscLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MiscLabel.BackgroundTransparency = 1.000
+MiscLabel.Position = UDim2.new(0, 10, 0, 5)
+MiscLabel.Size = UDim2.new(0, 100, 0, 20)
+MiscLabel.Font = Enum.Font.Gotham
+MiscLabel.Text = "MISC"
+MiscLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+MiscLabel.TextSize = 14.000
+MiscLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- WalkSpeed UI Setup moved to MiscFrame
+WalkSpeedFrame.Name = "WalkSpeedFrame"
+WalkSpeedFrame.Parent = MiscFrame
+WalkSpeedFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+WalkSpeedFrame.BorderSizePixel = 0
+WalkSpeedFrame.Position = UDim2.new(0, 10, 0, 30)
+WalkSpeedFrame.Size = UDim2.new(1, -20, 0, 25)
+
+WalkSpeedLabel.Name = "WalkSpeedLabel"
+WalkSpeedLabel.Parent = WalkSpeedFrame
+WalkSpeedLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+WalkSpeedLabel.BackgroundTransparency = 1.000
+WalkSpeedLabel.Position = UDim2.new(0, 5, 0, 0)
+WalkSpeedLabel.Size = UDim2.new(0, 150, 1, 0)
+WalkSpeedLabel.Font = Enum.Font.Gotham
+WalkSpeedLabel.Text = "WalkSpeed (LeftAlt):"
+WalkSpeedLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+WalkSpeedLabel.TextSize = 12.000
+WalkSpeedLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+WalkSpeedToggle.Name = "WalkSpeedToggle"
+WalkSpeedToggle.Parent = WalkSpeedFrame
+WalkSpeedToggle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+WalkSpeedToggle.BorderSizePixel = 0
+WalkSpeedToggle.Position = UDim2.new(0.8, 0, 0, 0)
+WalkSpeedToggle.Size = UDim2.new(0.2, -5, 1, 0)
+WalkSpeedToggle.Font = Enum.Font.Gotham
+WalkSpeedToggle.Text = "OFF"
+WalkSpeedToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+WalkSpeedToggle.TextSize = 12.000
+
+-- Auto SS Ball Control (formerly AutoGuard) - Frame adjusted for new inputs
+AutoSSBallControlFrame.Name = "AutoSSBallControlFrame"
+AutoSSBallControlFrame.Parent = MiscFrame
+AutoSSBallControlFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+AutoSSBallControlFrame.BorderSizePixel = 0
+AutoSSBallControlFrame.Position = UDim2.new(0, 10, 0, 60)
+AutoSSBallControlFrame.Size = UDim2.new(1, -20, 0, 175)
+
+AutoSSBallControlLabel.Name = "AutoSSBallControlLabel"
+AutoSSBallControlLabel.Parent = AutoSSBallControlFrame
+AutoSSBallControlLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+AutoSSBallControlLabel.BackgroundTransparency = 1.000
+AutoSSBallControlLabel.Position = UDim2.new(0, 5, 0, 0)
+AutoSSBallControlLabel.Size = UDim2.new(0, 100, 0, 25)
+AutoSSBallControlLabel.Font = Enum.Font.Gotham
+AutoSSBallControlLabel.Text = "Auto SS Ball Control:"
+AutoSSBallControlLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+AutoSSBallControlLabel.TextSize = 12.000
+AutoSSBallControlLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+AutoSSBallControlToggle.Name = "AutoSSBallControlToggle"
+AutoSSBallControlToggle.Parent = AutoSSBallControlFrame
+AutoSSBallControlToggle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+AutoSSBallControlToggle.BorderSizePixel = 0
+AutoSSBallControlToggle.Position = UDim2.new(0.8, 0, 0, 0)
+AutoSSBallControlToggle.Size = UDim2.new(0.2, -5, 0, 25)
+AutoSSBallControlToggle.Font = Enum.Font.Gotham
+AutoSSBallControlToggle.Text = "OFF"
+AutoSSBallControlToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoSSBallControlToggle.TextSize = 12.000
+
+AutoSSBallControlKeyLabel.Name = "AutoSSBallControlKeyLabel"
+AutoSSBallControlKeyLabel.Parent = AutoSSBallControlFrame
+AutoSSBallControlKeyLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+AutoSSBallControlKeyLabel.BackgroundTransparency = 1.000
+AutoSSBallControlKeyLabel.Position = UDim2.new(0, 5, 0, 30)
+AutoSSBallControlKeyLabel.Size = UDim2.new(0, 100, 0, 20)
+AutoSSBallControlKeyLabel.Font = Enum.Font.Gotham
+AutoSSBallControlKeyLabel.Text = "Keybind:"
+AutoSSBallControlKeyLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+AutoSSBallControlKeyLabel.TextSize = 12.000
+AutoSSBallControlKeyLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+AutoSSBallControlKeyBox.Name = "AutoSSBallControlKeyBox"
+AutoSSBallControlKeyBox.Parent = AutoSSBallControlFrame
+AutoSSBallControlKeyBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+AutoSSBallControlKeyBox.BorderSizePixel = 0
+AutoSSBallControlKeyBox.Position = UDim2.new(0.5, 0, 0, 30)
+AutoSSBallControlKeyBox.Size = UDim2.new(0, 60, 0, 25)
+AutoSSBallControlKeyBox.Font = Enum.Font.Gotham
+AutoSSBallControlKeyBox.PlaceholderText = "L"
+AutoSSBallControlKeyBox.Text = "L"
+AutoSSBallControlKeyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoSSBallControlKeyBox.TextSize = 12.000
+
+-- NEW: Desired Distance Input
+local DesiredDistanceLabel = Instance.new("TextLabel")
+DesiredDistanceLabel.Name = "DesiredDistanceLabel"
+DesiredDistanceLabel.Parent = AutoSSBallControlFrame
+DesiredDistanceLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+DesiredDistanceLabel.BackgroundTransparency = 1.000
+DesiredDistanceLabel.Position = UDim2.new(0, 5, 0, 60)
+DesiredDistanceLabel.Size = UDim2.new(0, 100, 0, 20)
+DesiredDistanceLabel.Font = Enum.Font.Gotham
+DesiredDistanceLabel.Text = "Desired Distance:"
+DesiredDistanceLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+DesiredDistanceLabel.TextSize = 12.000
+DesiredDistanceLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+DesiredDistanceBox.Name = "DesiredDistanceBox"
+DesiredDistanceBox.Parent = AutoSSBallControlFrame
+DesiredDistanceBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+DesiredDistanceBox.BorderSizePixel = 0
+DesiredDistanceBox.Position = UDim2.new(0.5, 0, 0, 60)
+DesiredDistanceBox.Size = UDim2.new(0, 60, 0, 25)
+DesiredDistanceBox.Font = Enum.Font.Gotham
+DesiredDistanceBox.PlaceholderText = "7"
+DesiredDistanceBox.Text = "7"
+DesiredDistanceBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+DesiredDistanceBox.TextSize = 12.000
+
+-- NEW: Sideways Multiplier Input
+local SidewaysMultiplierLabel = Instance.new("TextLabel")
+SidewaysMultiplierLabel.Name = "SidewaysMultiplierLabel"
+SidewaysMultiplierLabel.Parent = AutoSSBallControlFrame
+SidewaysMultiplierLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SidewaysMultiplierLabel.BackgroundTransparency = 1.000
+SidewaysMultiplierLabel.Position = UDim2.new(0, 5, 0, 90)
+SidewaysMultiplierLabel.Size = UDim2.new(0, 100, 0, 20)
+SidewaysMultiplierLabel.Font = Enum.Font.Gotham
+SidewaysMultiplierLabel.Text = "Sideways Multiplier:"
+SidewaysMultiplierLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+SidewaysMultiplierLabel.TextSize = 12.000
+SidewaysMultiplierLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+SidewaysMultiplierBox.Name = "SidewaysMultiplierBox"
+SidewaysMultiplierBox.Parent = AutoSSBallControlFrame
+SidewaysMultiplierBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+SidewaysMultiplierBox.BorderSizePixel = 0
+SidewaysMultiplierBox.Position = UDim2.new(0.5, 0, 0, 90)
+SidewaysMultiplierBox.Size = UDim2.new(0, 60, 0, 25)
+SidewaysMultiplierBox.Font = Enum.Font.Gotham
+SidewaysMultiplierBox.PlaceholderText = "2"
+SidewaysMultiplierBox.Text = "2"
+SidewaysMultiplierBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+SidewaysMultiplierBox.TextSize = 12.000
+
+-- NEW: Backward Multiplier Input
+local BackwardMultiplierLabel = Instance.new("TextLabel")
+BackwardMultiplierLabel.Name = "BackwardMultiplierLabel"
+BackwardMultiplierLabel.Parent = AutoSSBallControlFrame
+BackwardMultiplierLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+BackwardMultiplierLabel.BackgroundTransparency = 1.000
+BackwardMultiplierLabel.Position = UDim2.new(0, 5, 0, 120)
+BackwardMultiplierLabel.Size = UDim2.new(0, 100, 0, 20)
+BackwardMultiplierLabel.Font = Enum.Font.Gotham
+BackwardMultiplierLabel.Text = "Backward Multiplier:"
+BackwardMultiplierLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+BackwardMultiplierLabel.TextSize = 12.000
+BackwardMultiplierLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+BackwardMultiplierBox.Name = "BackwardMultiplierBox"
+BackwardMultiplierBox.Parent = AutoSSBallControlFrame
+BackwardMultiplierBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+BackwardMultiplierBox.BorderSizePixel = 0
+BackwardMultiplierBox.Position = UDim2.new(0.5, 0, 0, 120)
+BackwardMultiplierBox.Size = UDim2.new(0, 60, 0, 25)
+BackwardMultiplierBox.Font = Enum.Font.Gotham
+BackwardMultiplierBox.PlaceholderText = "2" -- Changed default to 2 as per your provided script
+BackwardMultiplierBox.Text = "2" -- Changed default to 2 as per your provided script
+BackwardMultiplierBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+BackwardMultiplierBox.TextSize = 12.000
+
+-- NEW: Guard Range Input
+local GuardRangeLabel = Instance.new("TextLabel")
+GuardRangeLabel.Name = "GuardRangeLabel"
+GuardRangeLabel.Parent = AutoSSBallControlFrame
+GuardRangeLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+GuardRangeLabel.BackgroundTransparency = 1.000
+GuardRangeLabel.Position = UDim2.new(0, 5, 0, 150)
+GuardRangeLabel.Size = UDim2.new(0, 100, 0, 20)
+GuardRangeLabel.Font = Enum.Font.Gotham
+GuardRangeLabel.Text = "Guard Range:"
+GuardRangeLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+GuardRangeLabel.TextSize = 12.000
+GuardRangeLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+GuardRangeBox.Name = "GuardRangeBox"
+GuardRangeBox.Parent = AutoSSBallControlFrame
+GuardRangeBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+GuardRangeBox.BorderSizePixel = 0
+GuardRangeBox.Position = UDim2.new(0.5, 0, 0, 150)
+GuardRangeBox.Size = UDim2.new(0, 60, 0, 25)
+GuardRangeBox.Font = Enum.Font.Gotham
+GuardRangeBox.PlaceholderText = "15"
+GuardRangeBox.Text = "15"
+GuardRangeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+GuardRangeBox.TextSize = 12.000
+
+-- Auto Dive specific elements (adjusted position based on expanded AutoSSBallControlFrame)
+AutoDiveFrame.Name = "AutoDiveFrame"
+AutoDiveFrame.Parent = MiscFrame
+AutoDiveFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+AutoDiveFrame.BorderSizePixel = 0
+AutoDiveFrame.Position = UDim2.new(0, 10, 0, 240)
+AutoDiveFrame.Size = UDim2.new(1, -20, 0, 160)
+
+AutoDiveLabel.Name = "AutoDiveLabel"
+AutoDiveLabel.Parent = AutoDiveFrame
+AutoDiveLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+AutoDiveLabel.BackgroundTransparency = 1.000
+AutoDiveLabel.Position = UDim2.new(0, 5, 0, 0)
+AutoDiveLabel.Size = UDim2.new(0, 100, 0, 25)
+AutoDiveLabel.Font = Enum.Font.Gotham
+AutoDiveLabel.Text = "Auto Dive:"
+AutoDiveLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+AutoDiveLabel.TextSize = 12.000
+AutoDiveLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+AutoDiveToggle.Name = "AutoDiveToggle"
+AutoDiveToggle.Parent = AutoDiveFrame
+AutoDiveToggle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+AutoDiveToggle.BorderSizePixel = 0
+AutoDiveToggle.Position = UDim2.new(0.8, 0, 0, 0)
+AutoDiveToggle.Size = UDim2.new(0.2, -5, 0, 25)
+AutoDiveToggle.Font = Enum.Font.Gotham
+AutoDiveToggle.Text = "OFF"
+AutoDiveToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoDiveToggle.TextSize = 12.000
+
+AutoDiveKeyLabel.Name = "AutoDiveKeyLabel"
+AutoDiveKeyLabel.Parent = AutoDiveFrame
+AutoDiveKeyLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+AutoDiveKeyLabel.BackgroundTransparency = 1.000
+AutoDiveKeyLabel.Position = UDim2.new(0, 5, 0, 30)
+AutoDiveKeyLabel.Size = UDim2.new(0, 100, 0, 20)
+AutoDiveKeyLabel.Font = Enum.Font.Gotham
+AutoDiveKeyLabel.Text = "Keybind:"
+AutoDiveKeyLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+AutoDiveKeyLabel.TextSize = 12.000
+AutoDiveKeyLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+AutoDiveKeyBox.Name = "AutoDiveKeyBox"
+AutoDiveKeyBox.Parent = AutoDiveFrame
+AutoDiveKeyBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+AutoDiveKeyBox.BorderSizePixel = 0
+AutoDiveKeyBox.Position = UDim2.new(0.5, 0, 0, 30)
+AutoDiveKeyBox.Size = UDim2.new(0, 60, 0, 25)
+AutoDiveKeyBox.Font = Enum.Font.Gotham
+AutoDiveKeyBox.PlaceholderText = "M"
+AutoDiveKeyBox.Text = "M"
+AutoDiveKeyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoDiveKeyBox.TextSize = 12.000
+
+-- Dive Distance Input
+local DiveDistanceLabel = Instance.new("TextLabel")
+DiveDistanceLabel.Name = "DiveDistanceLabel"
+DiveDistanceLabel.Parent = AutoDiveFrame
+DiveDistanceLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+DiveDistanceLabel.BackgroundTransparency = 1.000
+DiveDistanceLabel.Position = UDim2.new(0, 5, 0, 60)
+DiveDistanceLabel.Size = UDim2.new(0, 100, 0, 20)
+DiveDistanceLabel.Font = Enum.Font.Gotham
+DiveDistanceLabel.Text = "Dive Distance:"
+DiveDistanceLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+DiveDistanceLabel.TextSize = 12.000
+DiveDistanceLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+DiveDistanceBox.Name = "DiveDistanceBox"
+DiveDistanceBox.Parent = AutoDiveFrame
+DiveDistanceBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+DiveDistanceBox.BorderSizePixel = 0
+DiveDistanceBox.Position = UDim2.new(0.5, 0, 0, 60)
+DiveDistanceBox.Size = UDim2.new(0, 60, 0, 25)
+DiveDistanceBox.Font = Enum.Font.Gotham
+DiveDistanceBox.PlaceholderText = "3"
+DiveDistanceBox.Text = "3"
+DiveDistanceBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+DiveDistanceBox.TextSize = 12.000
+
+-- Dive Minimum Speed Input
+local DiveMinSpeedLabel = Instance.new("TextLabel")
+DiveMinSpeedLabel.Name = "DiveMinSpeedLabel"
+DiveMinSpeedLabel.Parent = AutoDiveFrame
+DiveMinSpeedLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+DiveMinSpeedLabel.BackgroundTransparency = 1.000
+DiveMinSpeedLabel.Position = UDim2.new(0, 160, 0, 60)
+DiveMinSpeedLabel.Size = UDim2.new(0, 100, 0, 20)
+DiveMinSpeedLabel.Font = Enum.Font.Gotham
+DiveMinSpeedLabel.Text = "Min Ball Speed:"
+DiveMinSpeedLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+DiveMinSpeedLabel.TextSize = 12.000
+DiveMinSpeedLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+DiveMinSpeedBox.Name = "DiveMinSpeedBox"
+DiveMinSpeedBox.Parent = AutoDiveFrame
+DiveMinSpeedBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+DiveMinSpeedBox.BorderSizePixel = 0
+DiveMinSpeedBox.Position = UDim2.new(0.8, 0, 0, 60)
+DiveMinSpeedBox.Size = UDim2.new(0, 60, 0, 25)
+DiveMinSpeedBox.Font = Enum.Font.Gotham
+DiveMinSpeedBox.PlaceholderText = "5"
+DiveMinSpeedBox.Text = "5"
+DiveMinSpeedBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+DiveMinSpeedBox.TextSize = 12.000
+
+-- Offset Jump Threshold Input
+local OffsetJumpThresholdLabel = Instance.new("TextLabel")
+OffsetJumpThresholdLabel.Name = "OffsetJumpThresholdLabel"
+OffsetJumpThresholdLabel.Parent = AutoDiveFrame
+OffsetJumpThresholdLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+OffsetJumpThresholdLabel.BackgroundTransparency = 1.000
+OffsetJumpThresholdLabel.Position = UDim2.new(0, 5, 0, 90)
+OffsetJumpThresholdLabel.Size = UDim2.new(0, 100, 0, 20)
+OffsetJumpThresholdLabel.Font = Enum.Font.Gotham
+OffsetJumpThresholdLabel.Text = "Jump Threshold:"
+OffsetJumpThresholdLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+OffsetJumpThresholdLabel.TextSize = 12.000
+OffsetJumpThresholdLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+OffsetJumpThresholdBox.Name = "OffsetJumpThresholdBox"
+OffsetJumpThresholdBox.Parent = AutoDiveFrame
+OffsetJumpThresholdBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+OffsetJumpThresholdBox.BorderSizePixel = 0
+OffsetJumpThresholdBox.Position = UDim2.new(0.5, 0, 0, 90)
+OffsetJumpThresholdBox.Size = UDim2.new(0, 60, 0, 25)
+OffsetJumpThresholdBox.Font = Enum.Font.Gotham
+OffsetJumpThresholdBox.PlaceholderText = "0.5"
+OffsetJumpThresholdBox.Text = "0.5"
+OffsetJumpThresholdBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+OffsetJumpThresholdBox.TextSize = 12.000
+
+-- Side Step Distance Input
+local SideStepDistanceLabel = Instance.new("TextLabel")
+SideStepDistanceLabel.Name = "SideStepDistanceLabel"
+SideStepDistanceLabel.Parent = AutoDiveFrame
+SideStepDistanceLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SideStepDistanceLabel.BackgroundTransparency = 1.000
+SideStepDistanceLabel.Position = UDim2.new(0, 5, 0, 120)
+SideStepDistanceLabel.Size = UDim2.new(0, 100, 0, 20)
+SideStepDistanceLabel.Font = Enum.Font.Gotham
+SideStepDistanceLabel.Text = "Side Step Dist.:"
+SideStepDistanceLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+SideStepDistanceLabel.TextSize = 12.000
+SideStepDistanceLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+SideStepDistanceBox.Name = "SideStepDistanceBox"
+SideStepDistanceBox.Parent = AutoDiveFrame
+SideStepDistanceBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+SideStepDistanceBox.BorderSizePixel = 0
+SideStepDistanceBox.Position = UDim2.new(0.5, 0, 0, 120)
+SideStepDistanceBox.Size = UDim2.new(0, 60, 0, 25)
+SideStepDistanceBox.Font = Enum.Font.Gotham
+SideStepDistanceBox.PlaceholderText = "10"
+SideStepDistanceBox.Text = "10"
+SideStepDistanceBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+SideStepDistanceBox.TextSize = 12.000
+
+-- Settings Frame Setup
+SettingsFrame.Name = "SettingsFrame"
+SettingsFrame.Parent = MainScrollingFrame
+SettingsFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+SettingsFrame.BorderSizePixel = 0
+SettingsFrame.Position = UDim2.new(0, 10, 0, MiscFrame.Position.Y.Offset + MiscFrame.Size.Y.Offset + 10)
+SettingsFrame.Size = UDim2.new(1, -20, 0, 90)
+
+SettingsLabel.Name = "SettingsLabel"
+SettingsLabel.Parent = SettingsFrame
+SettingsLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SettingsLabel.BackgroundTransparency = 1.000
+SettingsLabel.Position = UDim2.new(0, 10, 0, 5)
+SettingsLabel.Size = UDim2.new(0, 100, 0, 20)
+SettingsLabel.Font = Enum.Font.Gotham
+SettingsLabel.Text = "SETTINGS"
+SettingsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+SettingsLabel.TextSize = 14.000
+SettingsLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+CloseKeyFrame.Name = "CloseKeyFrame"
+CloseKeyFrame.Parent = SettingsFrame
+CloseKeyFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+CloseKeyFrame.BorderSizePixel = 0
+CloseKeyFrame.Position = UDim2.new(0, 10, 0, 30)
+CloseKeyFrame.Size = UDim2.new(1, -20, 0, 25)
+
+CloseKeyLabel.Name = "CloseKeyLabel"
+CloseKeyLabel.Parent = CloseKeyFrame
+CloseKeyLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CloseKeyLabel.BackgroundTransparency = 1.000
+CloseKeyLabel.Position = UDim2.new(0, 5, 0, 0)
+CloseKeyLabel.Size = UDim2.new(0, 100, 1, 0)
+CloseKeyLabel.Font = Enum.Font.Gotham
+CloseKeyLabel.Text = "Close Key:"
+CloseKeyLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+CloseKeyLabel.TextSize = 12.000
+CloseKeyLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+CloseKeyBox.Name = "CloseKeyBox"
+CloseKeyBox.Parent = CloseKeyFrame
+CloseKeyBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+CloseKeyBox.BorderSizePixel = 0
+CloseKeyBox.Position = UDim2.new(0.5, 0, 0, 0)
+CloseKeyBox.Size = UDim2.new(0, 60, 0, 25)
+CloseKeyBox.Font = Enum.Font.Gotham
+CloseKeyBox.PlaceholderText = "Press a key..."
+CloseKeyBox.Text = ""
+CloseKeyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseKeyBox.TextSize = 12.000
+
+-- Panic Keybind Frame
+PanicKeyFrame.Name = "PanicKeyFrame"
+PanicKeyFrame.Parent = SettingsFrame
+PanicKeyFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+PanicKeyFrame.BorderSizePixel = 0
+PanicKeyFrame.Position = UDim2.new(0, 10, 0, 60)
+PanicKeyFrame.Size = UDim2.new(1, -20, 0, 25)
+
+PanicKeyLabel.Name = "PanicKeyLabel"
+PanicKeyLabel.Parent = PanicKeyFrame
+PanicKeyLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PanicKeyLabel.BackgroundTransparency = 1.000
+PanicKeyLabel.Position = UDim2.new(0, 5, 0, 0)
+PanicKeyLabel.Size = UDim2.new(0, 100, 1, 0)
+PanicKeyLabel.Font = Enum.Font.Gotham
+PanicKeyLabel.Text = "Panic Key:"
+PanicKeyLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+PanicKeyLabel.TextSize = 12.000
+PanicKeyLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+PanicKeyBox.Name = "PanicKeyBox"
+PanicKeyBox.Parent = PanicKeyFrame
+PanicKeyBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+PanicKeyBox.BorderSizePixel = 0
+PanicKeyBox.Position = UDim2.new(0.5, 0, 0, 0)
+PanicKeyBox.Size = UDim2.new(0, 60, 0, 25)
+PanicKeyBox.Font = Enum.Font.Gotham
+PanicKeyBox.PlaceholderText = "End"
+PanicKeyBox.Text = "End"
+PanicKeyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+PanicKeyBox.TextSize = 12.000
+
+CreditsFrame.Name = "CreditsFrame"
+CreditsFrame.Parent = MainFrame
+CreditsFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+CreditsFrame.BorderSizePixel = 0
+CreditsFrame.Position = UDim2.new(0, 0, 0, 60)
+CreditsFrame.Size = UDim2.new(1, 0, 1, -60)
+CreditsFrame.Visible = false
+
+CreditsLabel.Name = "CreditsLabel"
+CreditsLabel.Parent = CreditsFrame
+CreditsLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CreditsLabel.BackgroundTransparency = 1.000
+CreditsLabel.Position = UDim2.new(0, 10, 0, 10)
+CreditsLabel.Size = UDim2.new(1, -20, 0, 30)
+CreditsLabel.Font = Enum.Font.GothamBold
+CreditsLabel.Text = "CREDITS"
+CreditsLabel.TextColor3 = Color3.fromRGB(74, 137, 255)
+CreditsLabel.TextSize = 18.000
+
+CreditsText.Name = "CreditsText"
+CreditsText.Parent = CreditsFrame
+CreditsText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CreditsText.BackgroundTransparency = 1.000
+CreditsText.Position = UDim2.new(0, 10, 0, 50)
+CreditsText.Size = UDim2.new(1, -20, 0, 100)
+CreditsText.Font = Enum.Font.Gotham
+CreditsText.Text = "Script by: 4linushh\n\nVersion: 1.0"
+CreditsText.TextColor3 = Color3.fromRGB(200, 200, 200)
+CreditsText.TextSize = 14.000
+CreditsText.TextXAlignment = Enum.TextXAlignment.Left
+CreditsText.TextYAlignment = Enum.TextYAlignment.Top
+
+Divider.Name = "Divider"
+Divider.Parent = CreditsFrame
+Divider.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+Divider.BorderSizePixel = 0
+Divider.Position = UDim2.new(0, 10, 0, 45)
+Divider.Size = UDim2.new(1, -20, 0, 1)
+
+-- Functionality Variables
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local defaultWalkSpeed = humanoid.WalkSpeed
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local Camera = workspace.CurrentCamera
+
+-- Table to store all active connections for clean disconnection
+local allConnections = {}
+
+-- Helper function to add connections to the tracking table
+local function addConnection(connection)
+    if connection then
+        table.insert(allConnections, connection)
+    end
+    return connection -- Return the connection for direct assignment if needed
+end
+
+-- Keybind variables
+local currentCloseKey = nil
+local currentSSBallControlKey = Enum.KeyCode.L
+local currentAutoDiveKey = Enum.KeyCode.M
+local currentPanicKey = Enum.KeyCode.End
+
+-- WalkSpeed Toggle Logic
+local walkSpeedEnabled = false
+local walkSpeedActive = false
+
+addConnection(WalkSpeedToggle.MouseButton1Click:Connect(function()
+    walkSpeedEnabled = not walkSpeedEnabled
+    if walkSpeedEnabled then
+        WalkSpeedToggle.Text = "ON"
+        WalkSpeedToggle.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+    else
+        WalkSpeedToggle.Text = "OFF"
+        WalkSpeedToggle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+        if humanoid then
+            humanoid.WalkSpeed = defaultWalkSpeed
+        end
+        walkSpeedActive = false
+    end
+end))
+
+-- Function to set up the Close Key
+local function setupCloseKeyListener()
+    local keyName = CloseKeyBox.Text:upper()
+    local key = Enum.KeyCode[keyName]
+    if key then
+        currentCloseKey = key
+    else
+        currentCloseKey = nil
+    end
+end
+
+-- Function to set up the Panic Key
+local function setupPanicKeyListener()
+    local keyName = PanicKeyBox.Text:upper()
+    local key = Enum.KeyCode[keyName]
+    if key then
+        currentPanicKey = key
+    else
+        currentPanicKey = nil
+    end
+end
+
+-- Auto SS Ball Control Variables and Functions (UPDATED TO USE OLDER LOGIC)
+local currentDesiredDistance = 7
+local currentSidewaysMultiplier = 2
+local currentBackwardMultiplier = 2
+local currentGuardRange = 15
+
+local lastSSBallPosition_AutoGuard = nil
+local lastUpdateTime_AutoGuard = tick()
+
+local isSSBallControlActive = false
+local ssBallControlHeartbeatConnection = nil -- Declared here
+
+local function updateSSBallControlSettings()
+    currentDesiredDistance = tonumber(DesiredDistanceBox.Text) or 7
+    currentSidewaysMultiplier = tonumber(SidewaysMultiplierBox.Text) or 2
+    currentBackwardMultiplier = tonumber(BackwardMultiplierBox.Text) or 2
+    currentGuardRange = tonumber(GuardRangeBox.Text) or 15
+end
+
+addConnection(DesiredDistanceBox.FocusLost:Connect(updateSSBallControlSettings))
+addConnection(SidewaysMultiplierBox.FocusLost:Connect(updateSSBallControlSettings))
+addConnection(BackwardMultiplierBox.FocusLost:Connect(updateSSBallControlSettings))
+addConnection(GuardRangeBox.FocusLost:Connect(updateSSBallControlSettings))
+
+local function findSSBall()
+    local ssBallName = "SSBall"
+    local ball = game.Workspace:FindFirstChild(ssBallName)
+
+    if not ball or not ball:IsA("BasePart") then
+        ball = game.Workspace:FindFirstChild("MPS")
+        if ball and ball:IsA("BasePart") then
+            return ball
+        end
+
+        for _, obj in pairs(game.Workspace:GetChildren()) do
+            if obj:IsA("BasePart") and string.find(string.lower(obj.Name), "ball") then
+                return obj
+            end
+        end
+        return nil
+    else
+        return ball
+    end
+end
+
+local function toggleSSBallControlScript(state)
+    isSSBallControlActive = state
+    if isSSBallControlActive then
+        AutoSSBallControlToggle.Text = "ON"
+        AutoSSBallControlToggle.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+        print("SSBall auto control activated (Stay behind ball).")
+
+        lastSSBallPosition_AutoGuard = nil
+        lastUpdateTime_AutoGuard = tick()
+        updateSSBallControlSettings()
+
+        if ssBallControlHeartbeatConnection then -- Disconnect existing connection if any
+            ssBallControlHeartbeatConnection:Disconnect()
+            -- Optionally, remove from allConnections if not done by addConnection (it is)
+        end
+
+        ssBallControlHeartbeatConnection = addConnection(RunService.Heartbeat:Connect(function()
+            if not character or not character.Parent then
+                character = player.Character or player.CharacterAdded:Wait()
+                task.wait()
+            end
+            if character and (not humanoid or not humanoid.Parent) then
+                humanoid = character:WaitForChild("Humanoid", 0.1)
+                task.wait()
+            end
+            if character and (not humanoidRootPart or not humanoidRootPart.Parent) then
+                humanoidRootPart = character:WaitForChild("HumanoidRootPart", 0.1)
+                task.wait()
+            end
+
+            if not character or not character.Parent or not humanoid or not humanoid.Parent or not humanoidRootPart or not humanoidRootPart.Parent then
+                if ssBallControlHeartbeatConnection then
+                    ssBallControlHeartbeatConnection:Disconnect()
+                    ssBallControlHeartbeatConnection = nil
+                end
+                isSSBallControlActive = false
+                AutoSSBallControlToggle.Text = "OFF"
+                AutoSSBallControlToggle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+                print("SSBall auto control stopped due to character/humanoid/HRP being unavailable.")
+                return
+            end
+
+            if not isSSBallControlActive then
+                if ssBallControlHeartbeatConnection then
+                    ssBallControlHeartbeatConnection:Disconnect()
+                    ssBallControlHeartbeatConnection = nil
+                end
+                return
+            end
+
+            local ssBall = findSSBall()
+
+            if ssBall then
+                local currentSSBallPosition = ssBall.Position
+                local currentTime = tick()
+                local deltaTime = currentTime - lastUpdateTime_AutoGuard
+
+                local ballVelocity = Vector3.new(0,0,0)
+
+                if lastSSBallPosition_AutoGuard and deltaTime > 0 then
+                    ballVelocity = (currentSSBallPosition - lastSSBallPosition_AutoGuard) / deltaTime
+                end
+
+                lastSSBallPosition_AutoGuard = currentSSBallPosition
+                lastUpdateTime_AutoGuard = currentTime
+
+                local playerToBall = currentSSBallPosition - humanoidRootPart.Position
+                local distance = playerToBall.Magnitude
+
+                if distance <= currentGuardRange then
+                    local targetPosition = humanoidRootPart.Position
+
+                    if ballVelocity.Magnitude > 0.1 then
+                        local behindDirection = -ballVelocity.Unit
+                        targetPosition = currentSSBallPosition + behindDirection * currentDesiredDistance
+                        targetPosition = Vector3.new(targetPosition.X, humanoidRootPart.Position.Y, targetPosition.Z)
+                    else
+                        local desiredOffset = playerToBall.Unit * -currentDesiredDistance
+                        targetPosition = currentSSBallPosition + desiredOffset
+                        targetPosition = Vector3.new(targetPosition.X, humanoidRootPart.Position.Y, targetPosition.Z)
+                    end
+
+                    local isBehind = ballVelocity.Magnitude < 0.1 or playerToBall:Dot(-ballVelocity.Unit) > 0.5
+                    local atDesiredDistance = math.abs(distance - currentDesiredDistance) < 1
+
+                    if isBehind and atDesiredDistance then
+                        humanoid:MoveTo(humanoidRootPart.Position)
+                    else
+                        humanoid:MoveTo(targetPosition)
+                    end
+                else
+                    humanoid:MoveTo(humanoidRootPart.Position)
+                end
+            else
+                if isSSBallControlActive and humanoid and humanoidRootPart and humanoidRootPart.Parent then
+                    humanoid:MoveTo(humanoidRootPart.Position)
+                end
+            end
+        end))
+    else
+        AutoSSBallControlToggle.Text = "OFF"
+        AutoSSBallControlToggle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+        print("SSBall auto control deactivated.")
+        if ssBallControlHeartbeatConnection then
+            ssBallControlHeartbeatConnection:Disconnect()
+            ssBallControlHeartbeatConnection = nil
+        end
+        if humanoid and humanoidRootPart and humanoidRootPart.Parent then
+            humanoid:MoveTo(humanoidRootPart.Position)
+        end
+    end
+end
+
+-- Auto Dive Variables and Functions
+local isAutoDiveActive = false
+local autoDiveHeartbeatConnection = nil
+local diveDistance = 3
+local diveMinBallSpeed = 5
+local offsetJumpThreshold = 0.5
+local sideStepDistance = 10
+local lastSideStepTriggerTime = 0
+local sideStepActionCooldown = 0.2
+
+local lastSSBallVerticalPosition = nil
+
+local function updateAutoDiveSettings()
+    diveDistance = tonumber(DiveDistanceBox.Text) or 3
+    diveMinBallSpeed = tonumber(DiveMinSpeedBox.Text) or 5
+    offsetJumpThreshold = tonumber(OffsetJumpThresholdBox.Text) or 0.5
+    sideStepDistance = tonumber(SideStepDistanceBox.Text) or 10
+end
+
+addConnection(DiveDistanceBox.FocusLost:Connect(updateAutoDiveSettings))
+addConnection(DiveMinSpeedBox.FocusLost:Connect(updateAutoDiveSettings))
+addConnection(OffsetJumpThresholdBox.FocusLost:Connect(updateAutoDiveSettings))
+addConnection(SideStepDistanceBox.FocusLost:Connect(updateAutoDiveSettings))
+
+local function toggleAutoDiveScript(state)
+    isAutoDiveActive = state
+    if isAutoDiveActive then
+        AutoDiveToggle.Text = "ON"
+        AutoDiveToggle.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+        print("Auto Dive activated.")
+        updateAutoDiveSettings()
+        lastSSBallPosition_AutoGuard = nil
+        lastSSBallVerticalPosition = nil
+        lastUpdateTime_AutoGuard = tick()
+        lastSideStepTriggerTime = 0
+
+        if autoDiveHeartbeatConnection then -- Disconnect existing connection if any
+            autoDiveHeartbeatConnection:Disconnect()
+            -- Optionally, remove from allConnections if not done by addConnection (it is)
+        end
+
+        autoDiveHeartbeatConnection = addConnection(RunService.Heartbeat:Connect(function()
+            if not character or not character.Parent then
+                character = player.Character or player.CharacterAdded:Wait()
+                task.wait()
+            end
+            if character and (not humanoid or not humanoid.Parent) then
+                humanoid = character:WaitForChild("Humanoid", 0.1)
+                task.wait()
+            end
+            if character and (not humanoidRootPart or not humanoidRootPart.Parent) then
+                humanoidRootPart = character:WaitForChild("HumanoidRootPart", 0.1)
+                task.wait()
+            end
+
+            if not character or not character.Parent or not humanoid or not humanoid.Parent or not humanoidRootPart or not humanoidRootPart.Parent then
+                if autoDiveHeartbeatConnection then
+                    autoDiveHeartbeatConnection:Disconnect()
+                    autoDiveHeartbeatConnection = nil
+                end
+                isAutoDiveActive = false
+                AutoDiveToggle.Text = "OFF"
+                AutoDiveToggle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+                print("Auto Dive stopped due to character/humanoid/HRP being unavailable.")
+                return
+            end
+
+            if not isAutoDiveActive then
+                if autoDiveHeartbeatConnection then
+                    autoDiveHeartbeatConnection:Disconnect()
+                    autoDiveHeartbeatConnection = nil
+                end
+                return
+            end
+
+            local ssBall = findSSBall()
+
+            if ssBall then
+                local playerToBall = ssBall.Position - humanoidRootPart.Position
+                local distance = playerToBall.Magnitude
+
+                local currentSSBallPosition = ssBall.Position
+                local currentTime = tick()
+                local deltaTime = currentTime - lastUpdateTime_AutoGuard
+
+                local ballMovementVector = Vector3.new(0,0,0)
+
+                if lastSSBallPosition_AutoGuard and deltaTime > 0 then
+                    ballMovementVector = (currentSSBallPosition - lastSSBallPosition_AutoGuard) / deltaTime
+                end
+
+                if distance <= sideStepDistance then
+                    local relativeX = ballMovementVector:Dot(humanoidRootPart.CFrame.RightVector)
+                    if (math.abs(relativeX) > 0.1) and (currentTime - lastSideStepTriggerTime > sideStepActionCooldown) then
+                        lastSideStepTriggerTime = currentTime
+                        task.spawn(function()
+                            if relativeX < 0 then
+                                VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Q, false, player)
+                                task.wait(0.05)
+                                VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Q, false, player)
+                            else
+                                VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.E, false, player)
+                                task.wait(0.05)
+                                VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.E, false, player)
+                            end
+                        end)
+                    end
+                end
+
+                if lastSSBallVerticalPosition and currentSSBallPosition.Y > lastSSBallVerticalPosition + offsetJumpThreshold then
+                    if distance <= diveDistance + 2 then
+                        humanoid.Jump = true
+                    end
+                end
+
+                if distance <= diveDistance then
+                    local ballToPlayerDot = ballMovementVector:Dot(playerToBall.Unit)
+                    if ballToPlayerDot < -0.5 and ballMovementVector.Magnitude > diveMinBallSpeed then
+                        humanoid.Jump = true
+                        local relativeX = ballMovementVector:Dot(humanoidRootPart.CFrame.RightVector)
+                        if relativeX < -2 then
+                            VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Q, false, player)
+                        elseif relativeX > 2 then
+                            VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.E, false, player)
+                        end
+                    end
+                end
+
+                lastSSBallPosition_AutoGuard = currentSSBallPosition
+                lastSSBallVerticalPosition = currentSSBallPosition.Y
+                lastUpdateTime_AutoGuard = currentTime
+
+            end
+        end))
+    else
+        AutoDiveToggle.Text = "OFF"
+        AutoDiveToggle.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+        print("Auto Dive deactivated.")
+        if autoDiveHeartbeatConnection then
+            autoDiveHeartbeatConnection:Disconnect()
+            autoDiveHeartbeatConnection = nil
+        end
+        lastSSBallPosition_AutoGuard = nil
+        lastSSBallVerticalPosition = nil
+        lastSideStepTriggerTime = 0
+    end
+end
+
+-- Function to uninject the script
+local function uninjectScript()
+    -- Disconnect all tracked connections
+    for _, connection in ipairs(allConnections) do
+        if connection and connection.Connected then
+            connection:Disconnect()
+        end
+    end
+    table.clear(allConnections) -- Clear the table after disconnecting
+
+    -- Ensure specific connections are explicitly nilled out if they exist
+    if ssBallControlHeartbeatConnection then
+        ssBallControlHeartbeatConnection:Disconnect()
+        ssBallControlHeartbeatConnection = nil
+    end
+    if autoDiveHeartbeatConnection then
+        autoDiveHeartbeatConnection:Disconnect()
+        autoDiveHeartbeatConnection = nil
+    end
+    if ssBallConnection then -- The ChildAdded connection
+        ssBallConnection:Disconnect()
+        ssBallConnection = nil
+    end
+
+
+    if ROFASCRIPT and ROFASCRIPT.Parent then
+        ROFASCRIPT:Destroy()
+    end
+
+    if humanoid then
+        humanoid.WalkSpeed = defaultWalkSpeed
+    end
+    for part, visualPart in pairs(visualParts) do
+        if visualPart and visualPart.Parent then
+            visualPart:Destroy()
+        end
+        resetBodyPart(part)
+    end
+    table.clear(visualParts)
+
+    Camera.CameraType = Enum.CameraType.Custom
+
+    print("ROFA SCRIPT has been uninjected.")
+    script:Destroy()
+end
+
+-- Auto SS Ball Control Toggle Button
+addConnection(AutoSSBallControlToggle.MouseButton1Click:Connect(function()
+    toggleSSBallControlScript(not isSSBallControlActive)
+end))
+
+-- Auto SS Ball Control Keybind Box
+addConnection(AutoSSBallControlKeyBox.Focused:Connect(function()
+    AutoSSBallControlKeyBox.Text = ""
+end))
+
+addConnection(AutoSSBallControlKeyBox.FocusLost:Connect(function()
+    local input = AutoSSBallControlKeyBox.Text:upper()
+    local success, keyResult = pcall(function()
+        return Enum.KeyCode[input]
+    end)
+
+    if success and keyResult then
+        AutoSSBallControlKeyBox.Text = input
+        currentSSBallControlKey = keyResult
+    else
+        AutoSSBallControlKeyBox.Text = "L"
+        currentSSBallControlKey = Enum.KeyCode.L
+    end
+end))
+
+-- Auto Dive Toggle Button
+addConnection(AutoDiveToggle.MouseButton1Click:Connect(function()
+    toggleAutoDiveScript(not isAutoDiveActive)
+end))
+
+-- Auto Dive Keybind Box
+addConnection(AutoDiveKeyBox.Focused:Connect(function()
+    AutoDiveKeyBox.Text = ""
+end))
+
+addConnection(AutoDiveKeyBox.FocusLost:Connect(function()
+    local input = AutoDiveKeyBox.Text:upper()
+    local success, keyResult = pcall(function()
+        return Enum.KeyCode[input]
+    end)
+
+    if success and keyResult then
+        AutoDiveKeyBox.Text = input
+        currentAutoDiveKey = keyResult
+    else
+        AutoDiveKeyBox.Text = "M"
+        currentAutoDiveKey = Enum.KeyCode.M
+    end
+end))
+
+-- Close Keybind Box
+addConnection(CloseKeyBox.Focused:Connect(function()
+    CloseKeyBox.Text = ""
+end))
+
+addConnection(CloseKeyBox.FocusLost:Connect(function()
+    local input = CloseKeyBox.Text:upper()
+    local success, keyResult = pcall(function()
+        return Enum.KeyCode[input]
+    end)
+
+    if success and keyResult then
+        CloseKeyBox.Text = input
+        setupCloseKeyListener()
+    else
+        CloseKeyBox.Text = ""
+        setupCloseKeyListener()
+    end
+end))
+
+-- Panic Keybind Box
+addConnection(PanicKeyBox.Focused:Connect(function()
+    PanicKeyBox.Text = ""
+end))
+
+addConnection(PanicKeyBox.FocusLost:Connect(function()
+    local input = PanicKeyBox.Text:upper()
+    local success, keyResult = pcall(function()
+        return Enum.KeyCode[input]
+    end)
+
+    if success and keyResult then
+        PanicKeyBox.Text = input
+        currentPanicKey = keyResult
+    else
+        PanicKeyBox.Text = "End"
+        currentPanicKey = Enum.KeyCode.End
+    end
+end))
+
+-- Centralized Global Keybinds Listener
+addConnection(UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+
+    if currentCloseKey and input.KeyCode == currentCloseKey then
+        ROFASCRIPT.Enabled = not ROFASCRIPT.Enabled
+        return
+    end
+
+    if currentSSBallControlKey and input.KeyCode == currentSSBallControlKey then
+        toggleSSBallControlScript(not isSSBallControlActive)
+        return
+    end
+
+    if currentAutoDiveKey and input.KeyCode == currentAutoDiveKey then
+        toggleAutoDiveScript(not isAutoDiveActive)
+        return
+    end
+
+    if input.KeyCode == Enum.KeyCode.LeftAlt and walkSpeedEnabled then
+        walkSpeedActive = not walkSpeedActive
+        if walkSpeedActive then
+            if humanoid then
+                humanoid.WalkSpeed = 30
+            end
+        else
+            if humanoid then
+                humanoid.WalkSpeed = defaultWalkSpeed
+            end
+        end
+        return
+    end
+
+    if currentPanicKey and input.KeyCode == currentPanicKey then
+        uninjectScript()
+        return
+    end
+
+    if not currentCloseKey and input.KeyCode == Enum.KeyCode.Delete then
+        ROFASCRIPT.Enabled = not ROFASCRIPT.Enabled
+        return
+    end
+end))
+
+-- Tab switching logic
+addConnection(MainTab.MouseButton1Click:Connect(function()
+    MainScrollingFrame.Visible = true
+    CreditsFrame.Visible = false
+    MainTab.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+    CreditsTab.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+end))
+
+addConnection(CreditsTab.MouseButton1Click:Connect(function()
+    MainScrollingFrame.Visible = false
+    CreditsFrame.Visible = true
+    MainTab.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    CreditsTab.BackgroundColor3 = Color3.fromRGB(74, 137, 255)
+end))
+
+-- Helper to parse comma-separated string to Vector3
+local function parseVector3(text)
+    local parts = {}
+    for part in string.gmatch(text, "[^,]+") do
+        table.insert(parts, tonumber(part))
+    end
+    if #parts == 3 and parts[1] and parts[2] and parts[3] then
+        return Vector3.new(parts[1], parts[2], parts[3])
+    end
+    return nil
+end
+
+-- Body Part Resizing Functions
+local visualParts = {}
+
+local function createVisualPart(realPart)
+    if not realPart then return nil end
+
+    if visualParts[realPart] then
+        visualParts[realPart]:Destroy()
+        visualParts[realPart] = nil
+    end
+
+    if not realPart:FindFirstChild("OriginalSize") then
+        local originalSize = Instance.new("Vector3Value")
+        originalSize.Name = "OriginalSize"
+        originalSize.Value = realPart.Size
+        originalSize.Parent = realPart
+    end
+
+    if not realPart:FindFirstChild("OriginalTransparency") then
+        local originalTransparency = Instance.new("NumberValue")
+        originalTransparency.Name = "OriginalTransparency"
+        originalTransparency.Value = realPart.Transparency
+        originalTransparency.Parent = realPart
+    end
+
+    local visualPart = realPart:Clone()
+    visualPart.Name = "VisualPart_" .. realPart.Name
+    visualPart.Transparency = 0
+    visualPart.CanCollide = false
+    visualPart.Anchored = false
+    visualPart.Massless = true
+
+    for _, child in ipairs(visualPart:GetDescendants()) do
+        if child:IsA("Motor6D") or child:IsA("WeldConstraint") then
+            child:Destroy()
+        end
+    end
+
+    local weld = Instance.new("WeldConstraint")
+    weld.Part0 = visualPart
+    weld.Part1 = realPart
+    weld.Parent = visualPart
+
+    visualPart.CFrame = realPart.CFrame
+    visualPart.Parent = realPart.Parent
+
+    realPart.Transparency = 1
+    realPart.CanCollide = false
+
+    visualParts[realPart] = visualPart
+    return visualPart
+end
+
+local function resetBodyPart(part)
+    if not part then return end
+
+    local originalTransparency = part:FindFirstChild("OriginalTransparency")
+    if originalTransparency then
+        part.Transparency = originalTransparency.Value
+        originalTransparency:Destroy()
+    end
+
+    part.CanCollide = true
+
+    if visualParts[part] then
+        visualParts[part]:Destroy()
+        visualParts[part] = nil
+    end
+
+    local originalSize = part:FindFirstChild("OriginalSize")
+    if originalSize then
+        part.Size = originalSize.Value
+        originalSize:Destroy()
+    end
+end
+
+local function resizeBodyPart(partName, sizeVector)
+    if not character or not character.Parent then return end
+
+    local parts = {}
+    if partName == "Leg" then
+        table.insert(parts, character:FindFirstChild("Left Leg") or character:FindFirstChild("LeftLowerLeg"))
+        table.insert(parts, character:FindFirstChild("Right Leg") or character:FindFirstChild("RightLowerLeg"))
+    elseif partName == "Arm" then
+        table.insert(parts, character:FindFirstChild("Left Arm") or character:FindFirstChild("LeftUpperArm"))
+        table.insert(parts, character:FindFirstChild("Right Arm") or character:FindFirstChild("RightUpperArm"))
+    elseif partName == "Head" then
+        table.insert(parts, character:FindFirstChild("Head"))
+    elseif partName == "Torso" then
+        table.insert(parts, character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso"))
+        table.insert(parts, character:FindFirstChild("LowerTorso"))
+    end
+
+    for _, part in ipairs(parts) do
+        if part then
+            local visualPart = visualParts[part] or createVisualPart(part)
+
+            part.Size = sizeVector
+
+            if visualPart then
+                local originalSize = part:FindFirstChild("OriginalSize")
+                if originalSize then
+                    visualPart.Size = originalSize.Value
+                end
+            end
+        end
+    end
+end
+
+-- SS Ball Functionality
+local desiredSSBallSize = Vector3.new(2, 2, 2)
+local ssBallConnection = nil -- Declared here
+
+local function processSSBall(ball)
+    if not ball or not ball:IsA("BasePart") then return end
+    ball.Size = desiredSSBallSize
+    ball.CanCollide = (desiredSSBallSize == Vector3.new(2, 2, 2)) -- Only make it non-collidable if it's the default size
+end
+
+local function checkForSSBalls()
+    -- Disconnect previous connection if it exists
+    if ssBallConnection then
+        ssBallConnection:Disconnect()
+        ssBallConnection = nil -- Explicitly nil it out
+    end
+
+    -- Establish new connection
+    ssBallConnection = addConnection(game.Workspace.ChildAdded:Connect(function(child)
+        if child and child:IsA("BasePart") then
+            if string.find(string.lower(child.Name), "ssball") or string.find(string.lower(child.Name), "mps") or string.find(string.lower(child.Name), "ball") then
+                processSSBall(child)
+            end
+        end
+    end))
+
+    -- Process existing balls in workspace
+    for _, child in ipairs(game.Workspace:GetChildren()) do
+        if child and child:IsA("BasePart") then
+            if string.find(string.lower(child.Name), "ssball") or string.find(string.lower(child.Name), "mps") or string.find(string.lower(child.Name), "ball") then
+                processSSBall(child)
+            end
+        end
+    end
+end
+
+-- Input Handling for Resizing
+addConnection(LegsPlus.MouseButton1Click:Connect(function()
+    local size = parseVector3(LegsSizeBox.Text)
+    if size then resizeBodyPart("Leg", size) end
+end))
+
+addConnection(LegsMinus.MouseButton1Click:Connect(function()
+    if character then
+        resetBodyPart(character:FindFirstChild("Left Leg") or character:FindFirstChild("LeftLowerLeg"))
+        resetBodyPart(character:FindFirstChild("Right Leg") or character:FindFirstChild("RightLowerLeg"))
+    end
+end))
+
+addConnection(ArmsPlus.MouseButton1Click:Connect(function()
+    local size = parseVector3(ArmsSizeBox.Text)
+    if size then resizeBodyPart("Arm", size) end
+end))
+
+addConnection(ArmsMinus.MouseButton1Click:Connect(function()
+    if character then
+        resetBodyPart(character:FindFirstChild("Left Arm") or character:FindFirstChild("LeftUpperArm"))
+        resetBodyPart(character:FindFirstChild("Right Arm") or character:FindFirstChild("RightUpperArm"))
+    end
+end))
+
+addConnection(HeadPlus.MouseButton1Click:Connect(function()
+    local size = parseVector3(HeadSizeBox.Text)
+    if size then resizeBodyPart("Head", size) end
+end))
+
+addConnection(HeadMinus.MouseButton1Click:Connect(function()
+    if character then
+        resetBodyPart(character:FindFirstChild("Head"))
+    end
+end))
+
+addConnection(TorsoPlus.MouseButton1Click:Connect(function()
+    local size = parseVector3(TorsoSizeBox.Text)
+    if size then resizeBodyPart("Torso", size) end
+end))
+
+addConnection(TorsoMinus.MouseButton1Click:Connect(function()
+    if character then
+        resetBodyPart(character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso"))
+        resetBodyPart(character:FindFirstChild("LowerTorso"))
+    end
+end))
+
+addConnection(SSBallPlus.MouseButton1Click:Connect(function()
+    local size = parseVector3(SSBallSizeBox.Text)
+    if size then
+        desiredSSBallSize = size
+        checkForSSBalls()
+    end
+end))
+
+addConnection(SSBallMinus.MouseButton1Click:Connect(function()
+    desiredSSBallSize = Vector3.new(2, 2, 2)
+    checkForSSBalls()
+end))
+
+-- Initial setup calls
+setupCloseKeyListener()
+setupPanicKeyListener()
+updateSSBallControlSettings()
+updateAutoDiveSettings()
+checkForSSBalls()
